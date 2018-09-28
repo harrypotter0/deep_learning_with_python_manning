@@ -84,3 +84,49 @@ regularizers.l1_l2(0.001, 0.001)
 #Dropout
 layer_output *= np.random.randint(0, high=2, size=layer_output.shape)
 layer_output *=0.5
+
+layer_output *= np.random.randint(0, high=2, size=layer_output.shape)
+layer_output /=0.5
+
+model1.add(layers.Dropout(0.5))
+
+# Adding dropout to the IMDB network 
+model = models.Sequential()
+model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
+model.add(layers.Dropout(0.5))
+model.add(layers.Dense(16, activation='relu'))
+model.add(layers.Dropout(0.5))
+model.add(layers.Dense(1, activation='sigmoid'))
+
+# These are the most common ways to prevent overfitting in neural networks:
+#  Get more training data.
+#  Reduce the capacity of the network.
+#  Add weight regularization.
+#  Add dropout.
+
+# Binary classification sigmoid binary_crossentropy
+# Multiclass, single-label classification softmax categorical_crossentropy
+# Multiclass, multilabel classification sigmoid binary_crossentropy
+# Regression to arbitrary values None mse
+# Regression to values between 0 and 1 sigmoid mse or binary_crossentropy
+
+# Scaling up: developing a model that overfits
+# To figure out how big a model you’ll need, you must develop a model that overfits.
+# This is fairly easy:
+# 1# Add layers.
+# 2# Make the layers bigger.
+# 3# Train for more epochs.
+# Always monitor the training loss and validation loss, as well as the training and valida-
+# tion values for any metrics you care about. When you see that the model’s perfor-
+# mance on the validation data begins to degrade, you’ve achieved overfitting.
+# The next stage is to start regularizing and tuning the model, to get as close as pos-
+# sible to the ideal model that neither underfits nor overfits.
+
+# Regularizing your model and tuning your hyperparameters
+#  Add dropout.
+#  Try different architectures: add or remove layers.
+#  Add L1 and/or L2 regularization.
+# Try different hyperparameters (such as the number of units per layer or the
+# learning rate of the optimizer) to find the optimal configuration.
+#  Optionally, iterate on feature engineering: add new features, or remove fea-
+# tures that don’t seem to be informative.
